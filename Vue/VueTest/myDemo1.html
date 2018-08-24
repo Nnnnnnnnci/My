@@ -4,12 +4,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Demo1</title>
+    <script src="vue.js"></script>
 </head>
 <body>
-    <div></div>
-    <form action="" method="post">
-        <input type="password" name="" id="">
-        <input type="submit" value="submit">
-    </form>
+    <div id="app">
+        <span>{{text}}</span><hr>
+        <span v-bind:title="message">鼠标悬停几秒查看当前绑定的动态信息</span><hr>
+        <span v-if="seen">看得见</span><hr>
+        <ul><li v-for="item in list">{{item.str}}</li></ul><hr>
+        <span>{{text}}</span><br>
+        <button v-on:click="btnClick">逆序</button><hr>
+        <span>{{modelData}}</span><br><input v-model="modelData" type="text"><hr>
+    </div>
+    <div id="app2">
+        <button v-on:click="btnTest">Test</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                text: 'Hello World!',
+                message: '页面加载于：' + new Date().toLocaleString(),
+                seen: true,
+                list: [
+                    {str:'1'},
+                    {str:'2'},
+                    {str:'3'},
+                ],
+                modelData: 'v-model'
+            },
+            methods: {
+                    btnClick: function() {
+                        this.text = this.text.split('').reverse().join('')
+                    },
+                },
+        });
+        var app2 = new Vue({
+            el: '#app2',
+            methods: {
+                btnTest: function() {
+                    alert('111')
+                }
+            }
+        })
+    </script>
 </body>
 </html>
